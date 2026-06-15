@@ -16,7 +16,6 @@ test('test', async ({ page }) => {
     await page.getByRole('textbox', { name: 'Enter your password' }).fill('Gmadhu@123');
     await expect(page.locator('.btn-primary.loginButton')).toHaveText('Login');
     await page.getByRole('button', { name: 'Login', exact: true }).click();
-  try{
     await expect(page.getByRole('main')).toContainText('View profile');
     await page.getByRole('link', { name: 'View profile' }).click();
     await expect(page.locator('#lazyAttachCV')).toContainText('Update resume');
@@ -32,7 +31,4 @@ test('test', async ({ page }) => {
     await expect(page.getByText('Logout')).toBeVisible({timeout: 10000});
     await page.getByText('Logout').first().click();
     await expect(page.getByText('Register')).toBeVisible();
-  }catch(error){
-    console.error('An error occurred:', error);
-  }
 });
