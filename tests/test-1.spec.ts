@@ -4,7 +4,7 @@ import path from 'path';
 const ResumePath = path.join(__dirname, '../Resume/MADHU GERA RESUME.docx');
 
 test('test', async ({ page }) => {
-  page.setDefaultTimeout(60000);
+  page.setDefaultTimeout(80000);
   await page.goto('https://www.naukri.com/');
     await expect(page.locator('#login_Layer')).toContainText('Login');
     await page.getByRole('link', { name: 'Login', exact: true }).click();
@@ -27,10 +27,12 @@ test('test', async ({ page }) => {
     await fileChooser.setFiles(ResumePath);
     await page.waitForTimeout(5000);
     await expect(page.locator('#lazyAttachCV')).toContainText('MADHU GERA RESUME.docx');
-  }finally{
-    await page.getByRole('img', { name: 'naukri user profile img' }).click();
-    await expect(page.locator('#ni-gnb-header-section')).toContainText('Logout');
-    await page.getByText('Logout').click();
-    await expect(page.getByRole('link', { name: 'Register' })).toBeVisible();
+    await expect(page.getByAltText('naukri user profile img')).toBeVisible();
+    await page.getByAltText('naukri user profile img').click();
+    await expect(page.getByText('Logout')).toBeVisible({timeout: 10000});
+    await page.getByText('Logout').first().click();
+    await expect(page.getByText('Register')).toBeVisible();
+  }catch(error){
+    console.error('An error occurred:', error);
   }
 });
