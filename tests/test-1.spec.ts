@@ -14,7 +14,7 @@ test('test', async ({ page }) => {
     await expect(page.locator('form[name="login-form"]')).toContainText('Password');
     await page.getByRole('textbox', { name: 'Enter your password' }).click();
     await page.getByRole('textbox', { name: 'Enter your password' }).fill('Gmadhu@123');
-    await expect(page.locator('form[name="login-form"]')).toContainText('Login');
+    await expect(page.locator('.btn-primary.loginButton')).toHaveText('Login');
     await page.getByRole('button', { name: 'Login', exact: true }).click();
   try{
     await expect(page.getByRole('main')).toContainText('View profile');
