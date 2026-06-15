@@ -17,7 +17,7 @@ test('test', async ({ page }) => {
     await expect(page.locator('.btn-primary.loginButton')).toHaveText('Login');
     await page.getByRole('button', { name: 'Login', exact: true }).click();
     await page.waitForTimeout(5000);
-    await page.getByRole('link', { name: 'View profile' }).click();
+    await page.getByRole('link', { name: 'View profile' }).click({timeout: 10000});
     await expect(page.locator('#lazyAttachCV')).toContainText('Update resume');
     const [fileChooser] = await Promise.all([
       page.waitForEvent('filechooser'),
